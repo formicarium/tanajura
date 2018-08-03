@@ -1,0 +1,10 @@
+type TechnologyDescription {
+  id: ID! @unique
+	shortText: String!
+	longText: String!
+	technology: Technology!
+
+	#	Metadata
+	createdAt: DateTime!
+	updatedAt: DateTime!
+}

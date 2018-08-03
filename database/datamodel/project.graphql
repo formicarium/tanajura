@@ -1,0 +1,32 @@
+enum ProjectStatus {
+	PROSPECT
+	OPEN
+	CLOSED
+}
+
+# TYPES
+type Project {
+	id: ID! @unique
+	name: String!
+	slug: String
+	imageUrl: String!
+	description: String!
+	status: ProjectStatus!
+	evId: String!
+	pageUrl: String
+	#	Relations
+	boards: [Board!]!
+	# Graph relations
+	technologies: [Technology!]!
+	attachments: [Attachment!]!
+	organizations: [Organization!]!
+	collaborators: [User!]!
+	#	Metadata
+	createdAt: DateTime!
+	updatedAt: DateTime!
+
+	#	ACL
+	isPublic: Boolean
+	allowACL: [String!]
+	denyACL: [String!]
+}

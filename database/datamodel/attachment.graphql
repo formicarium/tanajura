@@ -1,0 +1,37 @@
+#	ENUM
+enum AttachmentKind {
+	WEB
+	FILE
+}
+
+enum AttachmenType {
+	ARTICLE
+	BOOK
+	MEDIA
+	MOVIE
+	NEWS
+	PRODUCTPAGE
+	WHITEPAPER
+	WIKIPEDIA
+}
+
+type Attachment {
+	id: ID! @unique
+	name: String!
+	description: String!
+	type: AttachmenType!
+	kind: AttachmentKind!
+	imageUrl: String!
+	url: String!
+	technologies: [Technology!]!
+	organizations: [Organization!]!
+	projects: [Project!]!
+	#	Metadata
+	createdAt: DateTime!
+	updatedAt: DateTime!
+
+	#	ACL
+	isPublic: Boolean
+	allowACL: [String!]
+	denyACL: [String!]
+}

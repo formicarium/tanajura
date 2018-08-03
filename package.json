@@ -1,0 +1,89 @@
+{
+  "name": "@formicarium/tanajura",
+  "version": "0.0.1",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "dev": "env-cmd config/.dev.env nodemon -e ts,graphql -x ts-node src/index.ts",
+    "test": "env-cmd config/.test.env jest --config jest.json  --testPathPattern \"organizations|attachments\"",
+    "test:watch": "yarn test --watchAll",
+    "test:flow": "jest --config jest.flow.json --runInBand --testPathPattern \"organizations|attachments\"",
+    "test:flow:ci": "env-cmd config/.ci.env yarn test:flow",
+    "test:flow:host": "env-cmd config/.test.env yarn test:flow",
+    "test:flow:host:watch": "yarn test:flow:host --watchAll",
+    "docker:dev": "docker-compose -f docker-compose.dev.yml up",
+    "semantic-release": "semantic-release",
+    "commit": "git-cz",
+    "check-typescript": "tsc",
+    "lint": "tslint --project ./tsconfig.json --config ./tslint.json",
+    "lint-fix": "tslint --fix --project ./tsconfig.json --config ./tslint.json"
+  },
+  "dependencies": {
+    "@envisioning/common-core": "^4.5.0",
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "env-cmd": "^8.0.2",
+    "express": "^4.16.2",
+    "handlebars": "^4.0.11",
+    "lodash": "^4.17.5",
+    "node-git-server": "^0.4.3",
+    "ramda": "^0.25.0",
+    "uuid": "^3.2.1"
+  },
+  "devDependencies": {
+    "@semantic-release/changelog": "^1.0.1",
+    "@semantic-release/git": "^3.0.1",
+    "@types/cors": "^2.8.4",
+    "@types/express": "^4.11.1",
+    "@types/fs-extra": "^5.0.4",
+    "@types/handlebars": "^4.0.38",
+    "@types/jest": "^22.1.1",
+    "@types/ramda": "^0.25.19",
+    "@types/uuid": "^3.4.3",
+    "commitizen": "^2.9.6",
+    "cz-conventional-changelog": "^2.1.0",
+    "jest": "^22.2.1",
+    "nodemon": "^1.14.12",
+    "semantic-release": "^15.1.4",
+    "ts-jest": "^22.0.3",
+    "ts-node": "^4.1.0",
+    "tslint": "^5.9.1",
+    "typescript": "^2.9.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "release": {
+    "branch": "master",
+    "repositoryUrl": "https://github.com/formicarium/tanajura",
+    "verifyConditions": [
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      "@semantic-release/git",
+      "@semantic-release/github"
+    ],
+    "publish": [
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      {
+        "path": "@semantic-release/git",
+        "assets": [
+          "package.json",
+          "CHANGELOG.md"
+        ],
+        "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      },
+      "@semantic-release/github"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/formicarium/tanajura.git"
+  },
+  "publishConfig": {
+    "access": "restricted"
+  }
+}

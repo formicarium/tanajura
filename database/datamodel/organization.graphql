@@ -1,0 +1,35 @@
+enum CountryCodes {
+	BR
+	EN
+}
+
+enum OrganizationType {
+	ACADEMIC
+	GOVERNAMENTAL
+	NONPROFIT
+	PRIVATE
+}
+
+type Organization{
+	id: ID! @unique
+	name: String!
+	description: String
+	foundingYear: Int
+	headquarters: CountryCodes
+  type: OrganizationType
+	websiteUrl: String
+	logoImageUrl: String
+	#	Graph relations
+	technologies: [Technology!]!
+	attachments: [Attachment!]!
+	projects: [Project!]!
+
+	#	Metadata
+	createdAt: DateTime!
+	updatedAt: DateTime!
+
+	#	ACL
+	isPublic: Boolean
+	allowACL: [String!]
+	denyACL: [String!]
+}

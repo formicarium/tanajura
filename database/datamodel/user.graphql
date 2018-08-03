@@ -1,0 +1,35 @@
+# type UserContact {
+	
+# }
+
+type User @model {
+	id: ID! @unique
+	accountId: ID!
+	username: String!
+	firstName: String!
+	lastName: String!
+	email: String!
+
+	birth: DateTime
+  affiliation: String
+  address: String
+  about: String
+  imageUrl: String
+  country: String
+  bio: String
+
+	twitter: String
+	slack: String
+	github: String
+	skype: String
+	phone: String
+	mobile: String
+	personal: String
+
+	#	Metadata
+	createdAt: DateTime!
+	updatedAt: DateTime!
+
+	# relations
+	projects: [Project!]!
+}

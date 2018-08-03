@@ -1,0 +1,22 @@
+{
+  "prisma": {
+    "endpoint": "{{PRISMA_ENDPOINT}}"
+  },
+  "rabbitmq": {
+    "uri": "{{RABBITMQ_URI}}"
+  },
+  "service": {
+    "port": 3002
+  },
+  "redis": {
+    "uri": "{{REDIS_URI}}"
+  },
+  "token": {
+    "issuer": "envisioning",
+    "audience": "user",
+    "jwtDuration": "30d",
+    "publicKeyPath": "test/pubkey.pem",
+    "privateKeyPath": "test/privkey.pem",
+    "bucketName": "envisioning-secrets"
+  }
+}

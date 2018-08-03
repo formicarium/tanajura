@@ -1,0 +1,12 @@
+type Collection {
+  id: ID! @unique
+  name: String!
+  description: String!
+  color: String!
+  technologies: [Technology!]!
+  board: Board!
+  
+  #	Metadata
+	createdAt: DateTime!
+	updatedAt: DateTime!
+}

@@ -1,0 +1,10 @@
+{
+  "service": {
+    "port": 3002
+  },
+  "git": {
+    "folder": "/tmp/repos",
+    "type": "http",
+    "port": 6666
+  }
+}

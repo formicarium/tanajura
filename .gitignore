@@ -1,0 +1,4 @@
+node_modules
+graphfy
+.build
+dist/

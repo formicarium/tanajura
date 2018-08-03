@@ -1,0 +1,10 @@
+type Board {
+  id: ID! @unique
+  name: String
+  slug: String!
+  collections: [Collection!]!
+  project: Project!
+  #	Metadata
+	createdAt: DateTime!
+	updatedAt: DateTime!
+}
