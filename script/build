@@ -1,4 +1,4 @@
 #!/bin/bash
 
 set -euxo pipefail
-docker build --build-arg NPM_TOKEN="${NPM_TOKEN}" -t envisioning/entities-service:"${1}" .
+docker build --build-arg NPM_TOKEN="${NPM_TOKEN}" -t formicarium/tanajura:"${1}" .
