@@ -4,6 +4,8 @@ WORKDIR /usr/src/app
 
 COPY package.json yarn.lock ./
 
+RUN apk add --update git
+
 RUN yarn install --frozen-lockfile --no-cache
 
 COPY . .
