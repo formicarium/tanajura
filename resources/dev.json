@@ -6,5 +6,8 @@
     "folder": "/tmp/repos",
     "type": "http",
     "port": 6666
+  },
+  "services": {
+    "hive": "http://hive:8080"
   }
 }

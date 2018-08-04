@@ -1,10 +1,13 @@
-import { GitServer, IPush, IGitServer } from './components/git-server'
+import { IComponents } from './system'
+import { IHttpClient, HttpClient } from './components/http'
+import { GitServer, IGitServer } from './components/git-server'
 import * as path from 'path'
 import { routes } from './routes'
 import { IComponentMap } from '@envisioning/common-core/components/system'
 import { ConfigComponent, IConfigComponent } from '@envisioning/common-core/components/config'
 import { IClockComponent, ClockComponent } from '@envisioning/common-core/components/clock'
 import { ExpressService, IService } from './components/service'
+import { eventMap } from './diplomat/git'
 
 enum ENV {
   dev = 'dev',
@@ -20,13 +23,8 @@ export interface IComponents {
   config: IConfigComponent<IConfig>,
   service: IService,
   clock: IClockComponent,
+  http: IHttpClient,
   git: IGitServer
-}
-
-const eventMap = {
-  push: async (push: IPush) => {
-    console.log(push)
-  },
 }
 
 export const componentMap: IComponentMap = {
@@ -43,7 +41,11 @@ export const componentMap: IComponentMap = {
     dependenciesList: [],
   },
   git: {
-    instance: new GitServer(eventMap),
+    instance: new GitServer<IComponents>(eventMap),
+    dependenciesList: ['config', 'http'],
+  },
+  http: {
+    instance: new HttpClient(),
     dependenciesList: ['config'],
   },
 }

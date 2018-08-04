@@ -1,12 +1,6 @@
-# Javascript Node CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-#
 version: 2
 defaults: &defaults
   working_directory: ~/repo
-  environment:
-    AWS_DEFAULT_REGION: us-east-1
   docker:
     - image: rhinogram/node-awscli
 
@@ -17,8 +11,7 @@ jobs:
       - checkout
       - run:
           name: Install dependencies
-          command: |
-            echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+          command:
             yarn install
       - run:
           name: Typescript
@@ -27,79 +20,26 @@ jobs:
           name: Lint
           command: yarn lint
       - run:
-          name: Normal test
+          name: Test
           command: yarn test
+      - run:
+          name: Semantic release
+          command: |
+            yarn semantic-release
       - setup_remote_docker
       - run:
           name: Build application Docker image
           command: |
-            export IMAGE_NAME=envisioning/${CIRCLE_PROJECT_REPONAME}
-            docker build --cache-from=app --build-arg NPM_TOKEN=${NPM_TOKEN} -t app .
-      - run:
-          name: Flows test
-          command: script/ci
-      - run:
-          name: Semantic release
-          command: |
-            # echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
-            # yarn
-            yarn semantic-release
+            docker build --cache-from=app -t app .
       - deploy:
           name: Push application Docker image
           command: |
-            aws --version
-            export REPO_NAME=envisioning/${CIRCLE_PROJECT_REPONAME}
-            export ECR_TAG=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${REPO_NAME}
             export NPM_PACKAGE_VERSION=$(node -pe "require('./package.json').version")
-            aws ecr create-repository --repository-name $REPO_NAME || echo "Repo already exists"
-            $(aws ecr get-login --no-include-email)
-            docker tag app "${ECR_TAG}:${NPM_PACKAGE_VERSION}"
-            docker push "${ECR_TAG}:${NPM_PACKAGE_VERSION}"
-            MANIFEST=$(aws ecr batch-get-image --repository-name "$REPO_NAME" --image-ids imageTag="${NPM_PACKAGE_VERSION}" --query "images[].imageManifest" --output text)
-            aws ecr put-image --repository-name "$REPO_NAME" --image-tag latest --image-manifest "$MANIFEST"
-  # test:
-  #   <<: *defaults
-  #   steps:
-  #     - checkout
-  #     - attach_workspace:
-  #         at: ~/repo
-  #     - run: echo "Testing!"
-
-  # release:
-  #   <<: *defaults
-  #   steps:
-  #     - checkout
-  #     - attach_workspace:
-  #         at: ~/repo
-  #     - run: npm run semantic-release
-  #     - persist_to_workspace: 
-  #         root: ~/repo
-  #         paths:
-  #           - package.json
-  # publish-artifact:
-  #   <<: *defaults
-  #   steps:
-  #     - checkout
-  #     - attach_workspace:
-  #         at: ~/repo
-
+            docker login -u $DOCKERHUB_LOGIN -p $DOCKERHUB_PASSWORD
+            docker tag app formicarium/tanajura:${NPM_PACKAGE_VERSION}
+            docker push formicarium/tanajura:${NPM_PACKAGE_VERSION}
 workflows:
   version: 2
   build-test-release:
     jobs:
-      - build
-      # - test:
-      #     requires:
-      #       - build
-      # - release:
-      #     requires:
-      #       - test
-      #     filters:
-      #       branches:
-      #         only: master
-      # - publish-artifact:
-      #     requires:
-      #       - release
-      #     filters:
-      #       branches:
-      #         only: master  
+      - build-test-publish

@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@envisioning/common-core": "^4.5.0",
+    "axios": "^0.18.0",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "env-cmd": "^8.0.2",

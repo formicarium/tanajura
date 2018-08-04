@@ -20,7 +20,6 @@ routes.get('/health', (req, res) => {
 })
 
 routes.post('/api/repo', async (req: IRequest, res, next) => {
-  console.log(req.body)
   const {
     name,
   } = req.body

@@ -8,36 +8,44 @@ export interface IGitServerDependencies {
 
 export interface IHttpDuplex {
   accept: () => void
+  reject: () => void
 }
+
 export interface IPush extends IHttpDuplex {
   repo: string
   commit: string
   branch: string
 }
 
-export interface IEventMap {
-  push: (push: IPush) => Promise<void>
+export interface IEventMap<T> {
+  push: (push: IPush, components: T) => Promise<void>
 }
 
 export interface IGitServer {
   newRepo: (name: string) => Promise<void>
 }
-export class GitServer implements ILifecycle {
+export class GitServer<T> implements ILifecycle {
   private server: any
-  private eventMap: IEventMap
+  private eventMap: IEventMap<T>
 
-  constructor(eventMap: IEventMap) {
+  constructor(eventMap: IEventMap<T>) {
     this.eventMap = eventMap
   }
 
-  private setupEventHandling = () => {
-    this.server.on('push', this.eventMap.push)
+  private setupEventHandling = (components: T) => {
+    this.server.on('push', async (push: IPush) => {
+      try {
+        await this.eventMap.push(push, components)
+        push.accept()
+      } catch (err) {
+        push.reject()
+      }
+    })
   }
 
   public newRepo = (name: string) => {
     return new Promise((resolve, reject) => {
       this.server.create(name, (err) => {
-        console.log(err)
         if (err) {
           reject(err)
           return
@@ -47,13 +55,14 @@ export class GitServer implements ILifecycle {
     })
   }
 
-  public start({ config }: IGitServerDependencies) {
+  public start(components: IGitServerDependencies & T) {
+    const config = components.config
     const folder = config.getRequiredValue(['git', 'folder'])
     const port = config.getRequiredValue(['git', 'port'])
     const type = config.getRequiredValue(['git', 'type'])
 
     this.server = new Server(folder, {
-      autoCreate: false,
+      autoCreate: true,
     })
 
     return new Promise((resolve, reject) => {
@@ -64,11 +73,11 @@ export class GitServer implements ILifecycle {
           reject(err)
           return
         }
-        console.log(`Git is listening on ${port}`)
+        console.log(`Git is listening on http://localhost:${port}`)
         resolve()
       })
     })
-    .then(this.setupEventHandling)
+    .then(() => this.setupEventHandling(components))
   }
 
   public stop() {
