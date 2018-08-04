@@ -5,7 +5,7 @@ defaults: &defaults
     - image: rhinogram/node-awscli
 
 jobs:
-  build:
+  build-test-publish:
     <<: *defaults
     steps:
       - checkout
