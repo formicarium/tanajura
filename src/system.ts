@@ -3,15 +3,12 @@ import { IHttpClient, HttpClient } from './components/http'
 import { GitServer, IGitServer } from './components/git-server'
 import * as path from 'path'
 import { routes } from './routes'
-import { IComponentMap } from '@envisioning/common-core/components/system'
-import { ConfigComponent, IConfigComponent } from '@envisioning/common-core/components/config'
-import { IClockComponent, ClockComponent } from '@envisioning/common-core/components/clock'
 import { ExpressService, IService } from './components/service'
 import { eventMap } from './diplomat/git'
-
-enum ENV {
-  dev = 'dev',
-}
+import { IConfigComponent, ConfigComponent } from './components/config'
+import { IClockComponent, ClockComponent } from './components/clock'
+import { IComponentMap } from './components/system'
+import { ENV } from './const'
 
 export interface IConfig {
   service: {

@@ -1,5 +1,5 @@
-import { IConfigComponent } from '@envisioning/common-core/components/config'
 import axios, { AxiosRequestConfig } from 'axios'
+import { IConfigComponent } from './config'
 
 export interface IRequest extends AxiosRequestConfig {
   service: string

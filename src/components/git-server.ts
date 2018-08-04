@@ -1,6 +1,6 @@
-import { IConfigComponent } from '@envisioning/common-core/components/config'
 import { ILifecycle } from './lifecycle'
 import * as Server from 'node-git-server'
+import { IConfigComponent } from './config'
 
 export interface IGitServerDependencies {
   config: IConfigComponent<any>

@@ -1,5 +1,5 @@
-import { System } from '@envisioning/common-core/components/system'
 import { IComponents, componentMap } from './system'
+import { System } from './components/system'
 
 const main = async () => {
   const system = new System<IComponents>(componentMap)
