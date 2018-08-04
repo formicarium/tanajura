@@ -11,7 +11,8 @@ jobs:
       - checkout
       - run:
           name: Install dependencies
-          command:
+          command: |
+            echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
             yarn install
       - run:
           name: Typescript
