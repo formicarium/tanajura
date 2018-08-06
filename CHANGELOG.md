@@ -1,3 +1,10 @@
+## [1.2.3](https://github.com/formicarium/tanajura/compare/v1.2.2...v1.2.3) (2018-08-06)
+
+
+### Bug Fixes
+
+* **test:** relase2 ([2f48f6c](https://github.com/formicarium/tanajura/commit/2f48f6c))
+
 ## [1.2.2](https://github.com/formicarium/tanajura/compare/v1.2.1...v1.2.2) (2018-08-06)
 
 
