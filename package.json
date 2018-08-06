@@ -65,32 +65,6 @@
       "path": "./node_modules/cz-conventional-changelog"
     }
   },
-  "release": {
-    "publishConfig": {
-      "access": "public"
-    },
-    "branch": "master",
-    "repositoryUrl": "https://github.com/formicarium/tanajura",
-    "verifyConditions": [
-      "@semantic-release/changelog",
-      "@semantic-release/npm",
-      "@semantic-release/git",
-      "@semantic-release/github"
-    ],
-    "publish": [
-      "@semantic-release/changelog",
-      "@semantic-release/npm",
-      {
-        "path": "@semantic-release/git",
-        "assets": [
-          "package.json",
-          "CHANGELOG.md"
-        ],
-        "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
-      },
-      "@semantic-release/github"
-    ]
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/formicarium/tanajura.git"
