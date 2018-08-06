@@ -1,3 +1,10 @@
+## [1.2.4](https://github.com/formicarium/tanajura/compare/v1.2.3...v1.2.4) (2018-08-06)
+
+
+### Bug Fixes
+
+* **ci:** docker cache ([8cb80ac](https://github.com/formicarium/tanajura/commit/8cb80ac))
+
 ## [1.2.3](https://github.com/formicarium/tanajura/compare/v1.2.2...v1.2.3) (2018-08-06)
 
 
