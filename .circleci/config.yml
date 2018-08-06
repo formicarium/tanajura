@@ -5,33 +5,70 @@ defaults: &defaults
     - image: rhinogram/node-awscli
 
 jobs:
-  build-test-publish:
+  checkout:
     <<: *defaults
     steps:
       - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
       - run:
           name: Install dependencies
           command: |
             echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
             yarn install
+      - save_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules
+
+  check-typescript:
+    <<: *defaults
+    steps:
+      - restore_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
       - run:
-          name: Typescript
+          name: Build typescript
           command: yarn check-typescript
-      - run:
-          name: Lint
-          command: yarn lint
+
+  test:
+    <<: *defaults
+    steps:
+      - restore_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
       - run:
           name: Test
           command: yarn test
+
+  lint:
+    <<: *defaults
+    steps:
+      - restore_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
       - run:
-          name: Semantic release
-          command: |
-            yarn semantic-release
+          name: Test
+          command: yarn test
+
+  build-docker:
+    <<: *defaults
+    steps:
       - setup_remote_docker
       - run:
           name: Build application Docker image
-          command: |
+          command:
             docker build --cache-from=app -t app .
+
+  semantic-release:
+    <<: *defaults
+    steps:
+      - restore_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
+      - run:
+          name: Semantic release
+          command: yarn semantic-release
+
+  publish-docker:
+    <<: *defaults
+    steps:
       - deploy:
           name: Push application Docker image
           command: |
@@ -39,8 +76,63 @@ jobs:
             docker login -u $DOCKERHUB_LOGIN -p $DOCKERHUB_PASSWORD
             docker tag app formicarium/tanajura:${NPM_PACKAGE_VERSION}
             docker push formicarium/tanajura:${NPM_PACKAGE_VERSION}
+
+  # build-test-publish:
+  #   <<: *defaults
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         name: Install dependencies
+  #         command: |
+  #           echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+  #           yarn install
+  #     - run:
+  #         name: Typescript
+  #         command: yarn check-typescript
+  #     - run:
+  #         name: Lint
+  #         command: yarn lint
+  #     - run:
+  #         name: Test
+  #         command: yarn test
+  #     - run:
+  #         name: Semantic release
+  #         command: |
+  #           yarn semantic-release
+  #     - setup_remote_docker
+  #     - run:
+  #         name: Build application Docker image
+  #         command: |
+  #           docker build --cache-from=app -t app .
+  #     - deploy:
+  #         name: Push application Docker image
+  #         command: |
+  #           export NPM_PACKAGE_VERSION=$(node -pe "require('./package.json').version")
+  #           docker login -u $DOCKERHUB_LOGIN -p $DOCKERHUB_PASSWORD
+  #           docker tag app formicarium/tanajura:${NPM_PACKAGE_VERSION}
+  #           docker push formicarium/tanajura:${NPM_PACKAGE_VERSION}
 workflows:
   version: 2
   build-test-release:
     jobs:
-      - build-test-publish
+      - checkout
+      - check-typescript:
+          requires:
+            - checkout
+      - test:
+          requires:
+            - checkout
+      - lint:
+          requires:
+            - checkout
+      - build-docker:
+          requires:
+            - check-typescript
+            - test
+            - lint
+      - publish-docker:
+          requires:
+            - build-docker
+      - semantic-release:
+          requires:
+            - publish-docker
