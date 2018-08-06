@@ -66,13 +66,11 @@
     "repositoryUrl": "https://github.com/formicarium/tanajura",
     "verifyConditions": [
       "@semantic-release/changelog",
-      "@semantic-release/npm",
       "@semantic-release/git",
       "@semantic-release/github"
     ],
     "publish": [
       "@semantic-release/changelog",
-      "@semantic-release/npm",
       {
         "path": "@semantic-release/git",
         "assets": [
