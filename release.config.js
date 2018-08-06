@@ -1,4 +1,4 @@
-{
+module.exports = {
   "branch": "master",
   "publishConfig": {
     "access": "public"
@@ -23,16 +23,16 @@
     "@semantic-release/changelog",
     "@semantic-release/npm",
     "@semantic-release/git",
-    "@semantic-release/github"
+    // "@semantic-release/github"
   ],
   "publish": [
     "@semantic-release/npm",
-    "@semantic-release/github"
+    // "@semantic-release/github"
   ],
   "success": [
-    "@semantic-release/github"
+    // "@semantic-release/github"
   ],
   "fail": [
-    "@semantic-release/github"
+    // "@semantic-release/github"
   ]
 }
