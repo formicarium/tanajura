@@ -1,6 +1,6 @@
 {
   "name": "@formicarium/tanajura",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
@@ -23,6 +23,7 @@
     "@thunder-js/toposort": "^1.0.1",
     "axios": "^0.18.0",
     "body-parser": "^1.18.2",
+    "boom": "^7.2.0",
     "cors": "^2.8.4",
     "env-cmd": "^8.0.2",
     "express": "^4.16.2",
@@ -30,12 +31,14 @@
     "handlebars": "^4.0.11",
     "lodash": "^4.17.5",
     "node-git-server": "^0.4.3",
+    "pkginfo": "^0.4.1",
     "ramda": "^0.25.0",
     "uuid": "^3.2.1"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^1.0.1",
     "@semantic-release/git": "^3.0.1",
+    "@types/boom": "^7.2.0",
     "@types/cors": "^2.8.4",
     "@types/express": "^4.11.1",
     "@types/fs-extra": "^5.0.4",
