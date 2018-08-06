@@ -1,6 +1,8 @@
 import { ILifecycle } from './lifecycle'
 import * as Server from 'node-git-server'
 import { IConfigComponent } from './config'
+import * as fs from 'fs-extra'
+import * as path from 'path'
 
 export interface IGitServerDependencies {
   config: IConfigComponent<any>
@@ -23,10 +25,12 @@ export interface IEventMap<T> {
 
 export interface IGitServer {
   newRepo: (name: string) => Promise<void>
+  deleteRepo: (name: string) => Promise<void>
 }
 export class GitServer<T> implements ILifecycle {
   private server: any
   private eventMap: IEventMap<T>
+  private reposFolder: string
 
   constructor(eventMap: IEventMap<T>) {
     this.eventMap = eventMap
@@ -55,11 +59,19 @@ export class GitServer<T> implements ILifecycle {
     })
   }
 
+  public deleteRepo = (name: string): Promise<void> => {
+    const gitFolder = path.join(this.reposFolder, `${name}.git`)
+    console.log(`Deleting ${gitFolder}`)
+    return fs.remove(gitFolder)
+  }
+
   public start(components: IGitServerDependencies & T) {
     const config = components.config
-    const folder = config.getRequiredValue(['git', 'folder'])
+    const folder = config.getRequiredValue(['git', 'folder']) as string
     const port = config.getRequiredValue(['git', 'port'])
     const type = config.getRequiredValue(['git', 'type'])
+
+    this.reposFolder = folder
 
     this.server = new Server(folder, {
       autoCreate: true,

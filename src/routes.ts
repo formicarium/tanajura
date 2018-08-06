@@ -1,5 +1,5 @@
 import { IComponents } from './system'
-import { newRepo } from './git/controller'
+import * as gitController from './git/controller'
 import * as express from 'express'
 import * as bodyParser from 'body-parser'
 import * as cors from 'cors'
@@ -24,7 +24,22 @@ routes.post('/api/repo', async (req: IRequest, res, next) => {
     name,
   } = req.body
   try {
-    await newRepo(name, req.components)
+    await gitController.newRepo(name, req.components)
+    res.json({
+      name,
+    })
+  } catch (err) {
+    next(err)
+  }
+})
+
+routes.delete('/api/repo/:name', async (req: IRequest, res, next) => {
+  const {
+    name,
+  } = req.params
+  console.log(`deleting ${name}`)
+  try {
+    await gitController.deleteRepo(name, req.components)
     res.json({
       name,
     })

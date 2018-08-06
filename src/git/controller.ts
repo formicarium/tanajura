@@ -9,3 +9,7 @@ export const newRepo = (repo: string, { git }: IComponents): Promise<void> => {
 export const repoPushed = async (pushDescription: IPush, { http }: IComponents): Promise<diplomat.IServicesPushedResponse> => {
   return diplomat.repoPushed(pushDescription, http)
 }
+
+export const deleteRepo = (repo: string, { git }: IComponents): Promise<void> => {
+  return git.deleteRepo(repo)
+}
