@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/formicarium/tanajura/compare/v1.2.1...v1.2.2) (2018-08-06)
+
+
+### Bug Fixes
+
+* **test:** release ([821396b](https://github.com/formicarium/tanajura/commit/821396b))
+
 ## [1.2.1](https://github.com/formicarium/tanajura/compare/v1.2.0...v1.2.1) (2018-08-06)
 
 
