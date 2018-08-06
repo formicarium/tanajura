@@ -2,7 +2,11 @@ import { IComponents } from './../system'
 import * as diplomat from '../diplomat/http'
 import { IPush } from '../components/git-server'
 
-export const newRepo = (repo: string, { git }: IComponents): Promise<void> => {
+export const newRepo = async (repo: string, { git }: IComponents): Promise<void> => {
+  const exists = await git.repoExists(repo)
+  if (exists) {
+    throw new Error('repo already exists')
+  }
   return git.newRepo(repo)
 }
 

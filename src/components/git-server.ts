@@ -26,6 +26,7 @@ export interface IEventMap<T> {
 export interface IGitServer {
   newRepo: (name: string) => Promise<void>
   deleteRepo: (name: string) => Promise<void>
+  repoExists: (name: string) => Promise<boolean>
 }
 export class GitServer<T> implements ILifecycle {
   private server: any
@@ -57,6 +58,12 @@ export class GitServer<T> implements ILifecycle {
         resolve(name)
       })
     })
+  }
+
+  private pathForRepo = (name: string) => path.join(this.reposFolder, `${name}.git`)
+
+  public repoExists = (name: string): Promise<boolean> => {
+    return fs.pathExists(this.pathForRepo(name))
   }
 
   public deleteRepo = (name: string): Promise<void> => {
