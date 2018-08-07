@@ -1,3 +1,17 @@
+# [1.3.0](https://github.com/formicarium/tanajura/compare/v1.2.4...v1.3.0) (2018-08-07)
+
+
+### Bug Fixes
+
+* **repoPushed:** repoPushed requests to stinger instead of hive ([c8aaf5e](https://github.com/formicarium/tanajura/commit/c8aaf5e))
+* **repoPushed:** using :24000 on stinger ([76d4940](https://github.com/formicarium/tanajura/commit/76d4940))
+
+
+### Features
+
+* **http:** Added rawRequest ([17db979](https://github.com/formicarium/tanajura/commit/17db979))
+* **repoPushed:** calling repoPushed on git eventMap ([f69d87b](https://github.com/formicarium/tanajura/commit/f69d87b))
+
 ## [1.2.4](https://github.com/formicarium/tanajura/compare/v1.2.3...v1.2.4) (2018-08-06)
 
 
