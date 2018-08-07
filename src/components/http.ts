@@ -6,6 +6,7 @@ export interface IRequest extends AxiosRequestConfig {
 }
 export interface IHttpClient {
   request<T>(options: IRequest): Promise<T>
+  requestRaw<T>(options: AxiosRequestConfig): Promise<T>
 }
 
 export interface IServiceMap {
@@ -24,6 +25,11 @@ export class HttpClient {
 
   public stop() {
     // noop
+  }
+
+  public requestRaw<T>(config: AxiosRequestConfig): Promise<T> {
+    return axios.request<T>(config)
+      .then((response) => response.data)
   }
 
   public request<T>({ service, ...other }: IRequest): Promise<T> {
