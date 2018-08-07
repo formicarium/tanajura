@@ -92,14 +92,15 @@ workflows:
       - lint:
           requires:
             - install-dependencies
-      - build-docker:
+      - semantic-release:
           requires:
             - check-typescript
             - test
             - lint
-      - semantic-release:
+      - build-docker:
           requires:
-            - build-docker
+            - semantic-release
+      
 
 
 
