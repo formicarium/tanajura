@@ -5,6 +5,10 @@ import { repoPushed } from './http'
 
 export const eventMap: IEventMap<IComponents> = {
   push: async (push: IPush, components) => {
-    await repoPushed(push, components.http)
+    try {
+      await repoPushed(push, components.http)
+    } catch (err) {
+      console.log(err)
+    }
   },
 }
