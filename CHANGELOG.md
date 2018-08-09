@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/formicarium/tanajura/compare/v1.3.1...v1.4.0) (2018-08-09)
+
+
+### Features
+
+* **log:** logging ocrrectly ([ccb15aa](https://github.com/formicarium/tanajura/commit/ccb15aa))
+
 ## [1.3.1](https://github.com/formicarium/tanajura/compare/v1.3.0...v1.3.1) (2018-08-07)
 
 
