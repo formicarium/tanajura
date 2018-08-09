@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/formicarium/tanajura/compare/v1.5.0...v1.6.0) (2018-08-09)
+
+
+### Features
+
+* **endpoint:** Add health endpoint ([bc0138c](https://github.com/formicarium/tanajura/commit/bc0138c))
+
 # [1.5.0](https://github.com/formicarium/tanajura/compare/v1.4.2...v1.5.0) (2018-08-09)
 
 
