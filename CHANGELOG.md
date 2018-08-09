@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/formicarium/tanajura/compare/v1.3.0...v1.3.1) (2018-08-07)
+
+
+### Bug Fixes
+
+* **log:** log pushed error ([abdce68](https://github.com/formicarium/tanajura/commit/abdce68))
+
 # [1.3.0](https://github.com/formicarium/tanajura/compare/v1.2.4...v1.3.0) (2018-08-07)
 
 
