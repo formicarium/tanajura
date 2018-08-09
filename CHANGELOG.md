@@ -1,3 +1,10 @@
+## [1.4.2](https://github.com/formicarium/tanajura/compare/v1.4.1...v1.4.2) (2018-08-09)
+
+
+### Bug Fixes
+
+* **http:** fix stinger ([c39adad](https://github.com/formicarium/tanajura/commit/c39adad))
+
 ## [1.4.1](https://github.com/formicarium/tanajura/compare/v1.4.0...v1.4.1) (2018-08-09)
 
 
