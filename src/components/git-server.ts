@@ -39,12 +39,28 @@ export class GitServer<T> implements ILifecycle {
 
   private setupEventHandling = (components: T) => {
     this.server.on('push', async (push: IPush) => {
+      push.accept()
       try {
         await this.eventMap.push(push, components)
-        push.accept()
       } catch (err) {
         push.reject()
       }
+    })
+
+    console.log('setting up data')
+    this.server.on('data', async (x) => {
+      console.log('data')
+      console.log(x)
+    })
+
+    this.server.on('end', async (x) => {
+      console.log('end')
+      console.log(x)
+    })
+
+    this.server.on('close', async (x) => {
+      console.log('close')
+      console.log(x)
     })
   }
 
