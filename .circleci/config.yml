@@ -51,10 +51,26 @@ jobs:
           name: Test
           command: yarn test
 
+  semantic-release:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
+      - run:
+          name: Semantic release
+          command: yarn semantic-release
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - package.json
+
   build-docker:
     <<: *defaults
     steps:
       - checkout
+      - attach_workspace:
+          at: ~/repo
       - setup_remote_docker:
           docker_layer_caching: true
       - run: 
@@ -68,15 +84,7 @@ jobs:
             docker tag app formicarium/tanajura:${NPM_PACKAGE_VERSION}
             docker push formicarium/tanajura:${NPM_PACKAGE_VERSION}
 
-  semantic-release:
-    <<: *defaults
-    steps:
-      - checkout
-      - restore_cache:
-          key: dependency-cache-{{ checksum "yarn.lock" }}
-      - run:
-          name: Semantic release
-          command: yarn semantic-release
+
 
 workflows:
   version: 2
