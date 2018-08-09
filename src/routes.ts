@@ -21,6 +21,13 @@ routes.get('/api/version', (req, res) => {
   })
 })
 
+routes.get('/health', (req, res) => {
+  res.json({
+    healthy: true,
+    version
+  })
+})
+
 routes.post('/api/repo', asyncHandler(async (req: IRequest, res, next) => {
   const {
     name,
