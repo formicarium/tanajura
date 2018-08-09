@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/formicarium/tanajura/compare/v1.4.0...v1.4.1) (2018-08-09)
+
+
+### Bug Fixes
+
+* **dockerfile:** correct command ([c2b4efd](https://github.com/formicarium/tanajura/commit/c2b4efd))
+
 # [1.4.0](https://github.com/formicarium/tanajura/compare/v1.3.1...v1.4.0) (2018-08-09)
 
 
