@@ -24,7 +24,7 @@ routes.get('/api/version', (req, res) => {
 routes.get('/health', (req, res) => {
   res.json({
     healthy: true,
-    version
+    version,
   })
 })
 
