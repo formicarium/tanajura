@@ -32,6 +32,15 @@ routes.post('/api/repo', asyncHandler(async (req: IRequest, res, next) => {
   })
 }))
 
+routes.get('/api/repo/:name', asyncHandler(async (req: IRequest, res, next) => {
+  const {
+    name,
+  } = req.params
+  const repo = await gitController.getRepo(name, req.components)
+
+  res.json(repo)
+}))
+
 routes.delete('/api/repo/:name', asyncHandler(async (req: IRequest, res, next) => {
   const {
     name,
