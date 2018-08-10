@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/formicarium/tanajura/compare/v1.6.0...v1.7.0) (2018-08-10)
+
+
+### Features
+
+* **repo:** get repo ([2c76aff](https://github.com/formicarium/tanajura/commit/2c76aff))
+
 # [1.6.0](https://github.com/formicarium/tanajura/compare/v1.5.0...v1.6.0) (2018-08-09)
 
 
