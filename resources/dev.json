@@ -1,4 +1,5 @@
 {
+  "devspace": "{{DEVSPACE}}",
   "service": {
     "port": 3002
   },
@@ -8,6 +9,7 @@
     "port": 6666
   },
   "services": {
-    "hive": "http://hive:8080"
+    "hive": "http://hive:8080",
+    "soil": "http://localhost:8080"
   }
 }
