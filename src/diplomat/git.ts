@@ -5,10 +5,14 @@ import { repoPushed } from './http'
 
 export const eventMap: IEventMap<IComponents> = {
   push: async (push: IPush, components) => {
+    console.log('Received push:')
+    console.log(push)
     try {
       await repoPushed(push, components.http)
+      console.log('Success')
     } catch (err) {
-      console.log(err)
+      console.log(`Error pushing:`)
+      console.log(err.toString())
     }
   },
 }
