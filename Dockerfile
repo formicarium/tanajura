@@ -14,4 +14,4 @@ EXPOSE 3002
 EXPOSE 6666
 
 RUN rm -f .npmrc
-CMD [ "npm", "run", "dev" ]
+CMD [ "npm", "run", "start" ]
