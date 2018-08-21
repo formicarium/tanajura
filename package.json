@@ -8,11 +8,11 @@
   },
   "license": "MIT",
   "scripts": {
-    "start": "ts-node src/index.ts",
+    "start": "NODE_ENV=prod ts-node src/index.ts",
     "dev": "env-cmd config/.dev.env nodemon -e ts,graphql -x ts-node src/index.ts",
     "test": "env-cmd config/.test.env jest --config jest.json",
     "test:watch": "yarn test --watchAll",
-    "test:flow": "jest --config jest.flow.json --runInBand --testPathPattern \"organizations|attachments\"",
+    "test:flow": "jest --config jest.flow.json --runInBand",
     "test:flow:ci": "env-cmd config/.ci.env yarn test:flow",
     "test:flow:host": "env-cmd config/.test.env yarn test:flow",
     "test:flow:host:watch": "yarn test:flow:host --watchAll",
