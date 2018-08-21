@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/formicarium/tanajura/compare/v1.7.1...v1.8.0) (2018-08-21)
+
+
+### Features
+
+* **env:** Added NODE_ENV ([2b71e5b](https://github.com/formicarium/tanajura/commit/2b71e5b))
+
 ## [1.7.1](https://github.com/formicarium/tanajura/compare/v1.7.0...v1.7.1) (2018-08-17)
 
 
