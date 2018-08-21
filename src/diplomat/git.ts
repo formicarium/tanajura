@@ -8,8 +8,7 @@ export const eventMap: IEventMap<IComponents> = {
     console.log('Received push:')
     console.log(push)
     try {
-      await repoPushed(push, components.http)
-      console.log('Success')
+      await repoPushed(push, components.http, components.config.getConfig())
     } catch (err) {
       console.log(`Error pushing:`)
       console.log(err.toString())

@@ -11,6 +11,7 @@ import { IComponentMap } from './components/system'
 import { ENV } from './const'
 
 export interface IConfig {
+  devspace: string,
   service: {
     port: number,
   },

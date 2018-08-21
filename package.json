@@ -1,12 +1,12 @@
 {
   "name": "@formicarium/tanajura",
   "private": false,
-  "version": "1.7.0",
+  "version": "1.7.1",
   "main": "index.js",
   "publishConfig": {
     "access": "public"
   },
-  "license": "MIT",
+  "license": "bizznis",
   "scripts": {
     "start": "NODE_ENV=prod ts-node src/index.ts",
     "dev": "env-cmd config/.dev.env nodemon -e ts,graphql -x ts-node src/index.ts",

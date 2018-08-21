@@ -1,3 +1,10 @@
+## [1.7.1](https://github.com/formicarium/tanajura/compare/v1.7.0...v1.7.1) (2018-08-17)
+
+
+### Bug Fixes
+
+* **stinger:** Get stinger url from soil ([3f5ac3a](https://github.com/formicarium/tanajura/commit/3f5ac3a))
+
 # [1.7.0](https://github.com/formicarium/tanajura/compare/v1.6.0...v1.7.0) (2018-08-10)
 
 

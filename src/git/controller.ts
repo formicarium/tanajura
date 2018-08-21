@@ -12,8 +12,8 @@ export const newRepo = async (repo: string, { git }: IComponents): Promise<void>
   return git.newRepo(repo)
 }
 
-export const repoPushed = async (pushDescription: IPush, { http }: IComponents): Promise<diplomat.IServicesPushedResponse> => {
-  return diplomat.repoPushed(pushDescription, http)
+export const repoPushed = async (pushDescription: IPush, { http, config }: IComponents): Promise<diplomat.IServicesPushedResponse> => {
+  return diplomat.repoPushed(pushDescription, http, config.getConfig())
 }
 
 export const deleteRepo = (repo: string, { git }: IComponents): Promise<void> => {
