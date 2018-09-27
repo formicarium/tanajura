@@ -8,6 +8,8 @@ RUN apk add --update git
 
 RUN yarn install --frozen-lockfile --no-cache
 
+ENV NODE_ENV "prod"
+
 COPY . .
 
 EXPOSE 3002
