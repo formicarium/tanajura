@@ -10,6 +10,6 @@
   },
   "services": {
     "hive": "http://hive:8080",
-    "soil": "http://soil.formicarium.host"
+    "soil": "{{SOIL_URL}}"
   }
 }
