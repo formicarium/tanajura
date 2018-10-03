@@ -15,19 +15,19 @@ export const routes = express.Router()
 routes.use(bodyParser.json())
 routes.use(cors())
 
+/**
+ * GET /api/version
+ */
 routes.get('/api/version', (req, res) => {
   res.json({
     version,
   })
 })
 
-routes.get('/health', (req, res) => {
-  res.json({
-    healthy: true,
-    version,
-  })
-})
-
+/**
+ * Creates a repo
+ * POST /api/repo
+ */
 routes.post('/api/repo', asyncHandler(async (req: IRequest, res, next) => {
   const {
     name,
@@ -39,6 +39,10 @@ routes.post('/api/repo', asyncHandler(async (req: IRequest, res, next) => {
   })
 }))
 
+/**
+ * Get repo info
+ * GET /api/repo/:name
+ */
 routes.get('/api/repo/:name', asyncHandler(async (req: IRequest, res, next) => {
   const {
     name,
@@ -48,6 +52,10 @@ routes.get('/api/repo/:name', asyncHandler(async (req: IRequest, res, next) => {
   res.json(repo)
 }))
 
+/**
+ * Deletes a repo
+ * DELETE /api/repo/:name
+ */
 routes.delete('/api/repo/:name', asyncHandler(async (req: IRequest, res, next) => {
   const {
     name,
@@ -58,10 +66,10 @@ routes.delete('/api/repo/:name', asyncHandler(async (req: IRequest, res, next) =
   })
 }))
 
-routes.use((err, req, res, next) => {
-  const status = err && err.output && err.output.statusCode
+routes.use((err, _, res, __) => {
+  const status = err && err.output && err.output.statusCode || 500
   const payload = err && err.output && err.output.payload || {
-    statusCode: 500,
+    statusCode: status,
     error: 'Internal Server Error',
     message: err.toString(),
   }
