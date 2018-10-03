@@ -1,11 +1,5 @@
 import { IHttpClient } from './../components/http'
 import { IPush } from '../components/git-server'
-import { IConfig } from '../system'
-
-export interface IServicesPushedResponse {
-  ok: boolean
-}
-const getServiceNameFromRepo = (repo: string) => repo.slice(0, -4)
 
 interface IServiceResponse {
   name: string,
@@ -17,19 +11,22 @@ interface IServiceResponse {
   }
 }
 
-export const getStingerUrlForService = async (service: string, http: IHttpClient, config: IConfig) => {
+export const getStingerUrlForService = async (devspace: string, service: string, http: IHttpClient) => {
   const response = await http.request<IServiceResponse>({
     service: 'soil',
-    url: `/api/devspaces/${config.devspace}/services/${service}`,
+    url: `/api/devspaces/${devspace}/services/${service}`,
     method: 'get',
   })
   return response.links.stinger
 }
 
-export const repoPushed = async (pushDescription: IPush, http: IHttpClient, config: IConfig): Promise<IServicesPushedResponse> => {
-  const serviceUrl = await getStingerUrlForService(getServiceNameFromRepo(pushDescription.repo), http, config)
-  return http.requestRaw<IServicesPushedResponse>({
-    url: `${serviceUrl}/pull`,
+export interface IStingerPullResponse {
+  ok: boolean
+}
+
+export const tellStingerToPull = (stingerUrl: string, pushDescription: IPush, http: IHttpClient) => {
+  return http.requestRaw<IStingerPullResponse>({
+    url: `${stingerUrl}/pull`,
     method: 'POST',
     data: {
       branch: pushDescription.branch,

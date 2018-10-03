@@ -1,18 +1,18 @@
 import { IEventMap } from './../components/git-server'
 import {  IComponents } from './../system'
 import { IPush } from '../components/git-server'
-import { repoPushed } from './http'
+import * as controllers from '../controllers/repo'
+
+const handlePush = async (pushDescription: IPush, components: IComponents) => {
+  console.log(`Received push in repository ${pushDescription.repo}`)
+  try {
+    await controllers.pushReceived(pushDescription, components.http, components.config)
+  } catch (err) {
+    console.log('Failed to handle push')
+    console.log(err)
+  }
+}
 
 export const eventMap: IEventMap<IComponents> = {
-  push: async (push: IPush, components) => {
-    console.log('Received push:')
-    console.log(push)
-    try {
-      await repoPushed(push, components.http, components.config.getConfig())
-      console.log('Success')
-    } catch (err) {
-      console.log(`Error pushing:`)
-      console.log(err.toString())
-    }
-  },
+  push: handlePush,
 }
