@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/formicarium/tanajura/compare/v1.8.0...v1.9.0) (2018-10-03)
+
+
+### Features
+
+* **config:** REPOS_FOLDER from env var in prod and staging ([8ff660d](https://github.com/formicarium/tanajura/commit/8ff660d))
+
 # [1.8.0](https://github.com/formicarium/tanajura/compare/v1.7.1...v1.8.0) (2018-08-21)
 
 
