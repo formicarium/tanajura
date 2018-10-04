@@ -1,5 +1,5 @@
 import { IComponents } from './system'
-import * as gitController from './git/controller'
+import * as httpGitRepoController from './http-git/controllers/repo'
 import * as express from 'express'
 import * as bodyParser from 'body-parser'
 import * as cors from 'cors'
@@ -32,7 +32,7 @@ routes.post('/api/repo', asyncHandler(async (req: IRequest, res, next) => {
   const {
     name,
   } = req.body
-  await gitController.newRepo(name, req.components)
+  await httpGitRepoController.newRepo(name, req.components)
 
   res.json({
     name,
@@ -47,7 +47,7 @@ routes.get('/api/repo/:name', asyncHandler(async (req: IRequest, res, next) => {
   const {
     name,
   } = req.params
-  const repo = await gitController.getRepo(name, req.components)
+  const repo = await httpGitRepoController.getRepo(name, req.components)
 
   res.json(repo)
 }))
@@ -60,7 +60,7 @@ routes.delete('/api/repo/:name', asyncHandler(async (req: IRequest, res, next) =
   const {
     name,
   } = req.params
-  await gitController.deleteRepo(name, req.components)
+  await httpGitRepoController.deleteRepo(name, req.components)
   res.json({
     name,
   })

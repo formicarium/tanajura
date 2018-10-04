@@ -1,6 +1,6 @@
-import { IComponents } from './../system'
 import * as boom from 'boom'
-import { IRepo } from './model'
+import { IComponents } from '../../system'
+import { IRepo } from '../model/repo'
 
 /**
  * create a repo with name

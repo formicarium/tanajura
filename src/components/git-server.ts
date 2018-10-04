@@ -47,7 +47,6 @@ export class GitServer<T> implements ILifecycle {
       }
     })
 
-    console.log('setting up data')
     this.server.on('data', async (x) => {
       console.log('data')
       console.log(x)
