@@ -1,5 +1,5 @@
-import { IPush } from '../components/git-server'
+export const SKIP_PULL_TOKEN = '[skip-pull]'
 
-export const shouldSkipPull = (pushDescription: IPush) => {
-  console.log(pushDescription)
+export const shouldSkipPull = (commitMessage: string): boolean => {
+  return (commitMessage && commitMessage.indexOf(SKIP_PULL_TOKEN) > 0)
 }
