@@ -37,6 +37,7 @@
     "node-git-server": "^0.4.3",
     "pkginfo": "^0.4.1",
     "ramda": "^0.25.0",
+    "simple-git": "^1.104.0",
     "uuid": "^3.2.1"
   },
   "devDependencies": {
