@@ -1,4 +1,4 @@
 export interface ILifecycle {
-  start(dependencies: any): Promise<void> | void
-  stop?(): Promise<void> | void
+  start(dependencies: any): Promise<any> | any
+  stop?(): Promise<any> | any
 }
