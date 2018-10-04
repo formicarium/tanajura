@@ -62,3 +62,11 @@ export class StingerInternalServerError extends HttpError {
     this.name = StingerInternalServerError.id
   }
 }
+
+export class CommitPollingMaxPolls extends Error {
+  public static id = 'CommitPollingMaxPolls'
+  constructor(message?: string) {
+    super(message)
+    this.name = CommitPollingMaxPolls.id
+  }
+}
