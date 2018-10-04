@@ -6,6 +6,7 @@
     "ordered-imports": [true, {"import-sources-order": "any", "named-imports-order": "any"}],
     "quotemark": [true, "single", "avoid-escape"],
     "max-line-length": [false],
+    "max-classes-per-file": false,
     "eofline": true,
     "member-ordering": [false],
     "no-unused-variable": [true, {"ignore-pattern": "^React$"}],
