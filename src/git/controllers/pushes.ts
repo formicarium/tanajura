@@ -26,27 +26,22 @@ export const pushReceived = async (pushDescription: IPush, http: IHttpClient, co
   } catch (err) {
     switch (err.name) {
       case SoilUnreachableError.id:
-        console.log('Error: Soil is unreachable')
-        console.log(`address: ${err.address}:${err.port}`)
+        console.log(`Error: Soil is unreachable ${err.address}:${err.port}`)
         break
       case SoilServiceNotFound.id:
         const soilServiceNotFound: SoilServiceNotFound = err
-        console.log('Error: Soil service Not Found')
-        console.log(`address: ${soilServiceNotFound.address}:${soilServiceNotFound.port}`)
+        console.log(`Error: Soil service Not Found (${soilServiceNotFound.address}:${soilServiceNotFound.port}`)
         console.log(`devspace/service: ${soilServiceNotFound.devspaceName}/${soilServiceNotFound.serviceName}`)
         break
       case SoilInternalServerError.id:
-        console.log('Error: Soil internal server error')
-        console.log(`address: ${soilServiceNotFound.address}:${soilServiceNotFound.port}`)
+        console.log(`Error: Soil internal server error (${soilServiceNotFound.address}:${soilServiceNotFound.port})`)
         console.log(err)
         break
       case StingerUnreachableError.id:
-        console.log('Error: Stinger is unreachable')
-        console.log(`address: ${err.address}:${err.port}`)
+        console.log(`Error: Stinger is unreachable (${err.address}:${err.port})`)
         break
       case StingerInternalServerError.id:
-        console.log('stinger pull error!')
-        console.log(`address: ${err.address}:${err.port}`)
+        console.log(`stinger pull error! (${err.address}:${err.port})`)
         console.log(err)
         break
       default:
