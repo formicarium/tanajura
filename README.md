@@ -1,6 +1,6 @@
 # Tanajura
 
-[![CircleCI](https://circleci.com/gh/formicarium/tanajura.svg?style=svg)](https://circleci.com/gh/formicarium/tanajura)
+[![CircleCI](https://circleci.com/gh/formicarium/tanajura/tree/master.svg?style=svg)](https://circleci.com/gh/formicarium/tanajura/tree/master)
 
 ![Tanajura image](http://i.imgur.com/PhXQrl2.jpg)
 

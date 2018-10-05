@@ -1,3 +1,17 @@
+# [1.10.0](https://github.com/formicarium/tanajura/compare/v1.9.0...v1.10.0) (2018-10-04)
+
+
+### Bug Fixes
+
+* **ts:** make ts happy ([e327e6a](https://github.com/formicarium/tanajura/commit/e327e6a))
+
+
+### Features
+
+* **error:** Better error formatting ([19ec8ed](https://github.com/formicarium/tanajura/commit/19ec8ed))
+* **error:** Improve error handling ([cc1ddc2](https://github.com/formicarium/tanajura/commit/cc1ddc2))
+* **git:** Skip pull if commit message has [skip-pull] ([8c038f8](https://github.com/formicarium/tanajura/commit/8c038f8))
+
 # [1.9.0](https://github.com/formicarium/tanajura/compare/v1.8.0...v1.9.0) (2018-10-03)
 
 
