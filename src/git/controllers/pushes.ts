@@ -8,6 +8,7 @@ import { SoilUnreachableError, SoilServiceNotFound, SoilInternalServerError, Sti
 import { checkIfCommitArrived, getLastCommitMessage } from '../../diplomat/git-process'
 import * as path from 'path'
 import { shouldSkipPull } from '../../logic/commit'
+import * as fs from 'fs-extra'
 
 // A really silly method to check if the commit arrivied in our server
 const MAX_POLLS = 10
@@ -17,6 +18,11 @@ const waitUntilCommitArrived = (expectedCommit: string, gitFolder: string) => {
   let interval
   return new Promise((resolve, reject) => {
     const checkRoutine = async () => {
+      const gitFolderExists = await fs.pathExists(gitFolder)
+      if (!gitFolderExists) {
+        return
+      }
+
       count++
       if (count >= MAX_POLLS) {
         clearInterval(interval)
