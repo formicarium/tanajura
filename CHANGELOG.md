@@ -1,3 +1,10 @@
+## [1.10.3](https://github.com/formicarium/tanajura/compare/v1.10.2...v1.10.3) (2018-10-05)
+
+
+### Bug Fixes
+
+* **git:** returning false if could not read sha ([1aeeb23](https://github.com/formicarium/tanajura/commit/1aeeb23))
+
 ## [1.10.2](https://github.com/formicarium/tanajura/compare/v1.10.1...v1.10.2) (2018-10-05)
 
 
