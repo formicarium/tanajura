@@ -14,13 +14,13 @@ export const execAsPromise = (cmd: string, options: ExecOptions): Promise<string
 const clearString = (s) => s.replace(/\n|\r/g, '').trim()
 
 export const getLastCommitMessage = (gitFolder: string): Promise<string> => {
-  return execAsPromise('git log -1 --pretty=%B', {
+  return execAsPromise('git log -n 1 -b tanajura --pretty=%B', {
     cwd: gitFolder,
   }).then(clearString)
 }
 
 export const getLastCommitSha = (gitFolder: string) => {
-  return execAsPromise('git rev-parse HEAD', {
+  return execAsPromise('git log -n 1 -b tanajura --pretty=%H', {
     cwd: gitFolder,
   }).then(clearString)
 }
