@@ -39,6 +39,10 @@ export const getLastCommitInfo = async (gitFolder: string): Promise<ICommitInfo>
 }
 
 export const checkIfCommitArrived = async (expectedCommitSha: string, gitFolder: string): Promise<boolean> => {
-  const lastCommitSha = await getLastCommitSha(gitFolder)
-  return String(expectedCommitSha).valueOf() === String(lastCommitSha).valueOf()
+  try {
+    const lastCommitSha = await getLastCommitSha(gitFolder)
+    return String(expectedCommitSha).valueOf() === String(lastCommitSha).valueOf()
+  } catch (err) {
+    return false
+  }
 }
