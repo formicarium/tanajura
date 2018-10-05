@@ -1,3 +1,10 @@
+## [1.10.2](https://github.com/formicarium/tanajura/compare/v1.10.1...v1.10.2) (2018-10-05)
+
+
+### Bug Fixes
+
+* **git:** Check if git folder exists before sha checking routine ([f149737](https://github.com/formicarium/tanajura/commit/f149737))
+
 ## [1.10.1](https://github.com/formicarium/tanajura/compare/v1.10.0...v1.10.1) (2018-10-05)
 
 
