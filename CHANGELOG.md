@@ -1,3 +1,10 @@
+## [1.10.1](https://github.com/formicarium/tanajura/compare/v1.10.0...v1.10.1) (2018-10-05)
+
+
+### Bug Fixes
+
+* **git:** Read sha and commit from correct branch ([b5fcbbc](https://github.com/formicarium/tanajura/commit/b5fcbbc))
+
 # [1.10.0](https://github.com/formicarium/tanajura/compare/v1.9.0...v1.10.0) (2018-10-04)
 
 
