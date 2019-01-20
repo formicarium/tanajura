@@ -3,7 +3,7 @@ import { IHttpClient } from '../../components/http'
 import { IConfig } from '../../system'
 import { IConfigComponent } from '../../components/config'
 import { getServiceNameFromRepo } from '../../logic/repo'
-import { getStingerUrlForService, tellStingerToPull } from '../../diplomat/http'
+import { getStingerUrlsForService, tellStingersToPull } from '../../diplomat/http'
 import { SoilUnreachableError, SoilServiceNotFound, SoilInternalServerError, StingerUnreachableError, StingerInternalServerError, CommitPollingMaxPolls } from '../../diplomat/errors'
 import { checkIfCommitArrived, getLastCommitMessage } from '../../diplomat/git-process'
 import * as path from 'path'
@@ -73,8 +73,8 @@ export const pushReceived = async (pushDescription: IPush, http: IHttpClient, co
     // Tell stinger to pull
     const serviceName = getServiceNameFromRepo(pushDescription.repo)
     const devspace = config.getRequiredValue(['devspace']) as string
-    const stingerUrl = await getStingerUrlForService(devspace, serviceName, http)
-    await tellStingerToPull(stingerUrl, pushDescription, http)
+    const stingerUrls = await getStingerUrlsForService(devspace, serviceName, http)
+    await tellStingersToPull(stingerUrls, pushDescription, http)
   } catch (err) {
     switch (err.name) {
       case CommitPollingMaxPolls.id:
