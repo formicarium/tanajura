@@ -5,6 +5,7 @@ import * as R from 'ramda'
 
 interface IServiceResponse {
   name: string,
+  service: string,
   devspace: string,
   links: {
     default: string,
@@ -26,7 +27,7 @@ export const isConnectionRefused = R.equals('ECONNREFUSED')
  * @throws SoilInternalServerError
  */
 export const getStingerUrlsForService = (devspace: string, service: string, http: IHttpClient) => {
-  return http.request<IServiceResponse>({
+  return http.request<IServiceResponse[]>({
     service: 'soil',
     url: `/api/devspaces/${devspace}/services/${service}`,
     method: 'get',
