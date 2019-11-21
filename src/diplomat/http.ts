@@ -5,6 +5,7 @@ import * as R from 'ramda'
 
 interface IServiceResponse {
   name: string,
+  service: string,
   devspace: string,
   links: {
     default: string,
@@ -25,13 +26,13 @@ export const isConnectionRefused = R.equals('ECONNREFUSED')
  * @throws SoilServiceNotFound
  * @throws SoilInternalServerError
  */
-export const getStingerUrlForService = (devspace: string, service: string, http: IHttpClient) => {
-  return http.request<IServiceResponse>({
+export const getStingerUrlsForService = (devspace: string, service: string, http: IHttpClient) => {
+  return http.request<IServiceResponse[]>({
     service: 'soil',
     url: `/api/devspaces/${devspace}/services/${service}`,
     method: 'get',
   })
-  .then((response) => response.links.stinger)
+  .then((response) => response.map(app => app.links.stinger))
   .catch((error) => {
     throw R.cond([
       [isConnectionRefused, R.always(new SoilUnreachableError(error, error.address, error.port))],
@@ -48,7 +49,7 @@ export interface IStingerPullResponse {
 
 /**
  *
- * @param stingerUrl string
+ * @param stingerUrls string[]
  * @param pushDescription IPush`
  * @param http IHttpClient
  *
@@ -56,8 +57,8 @@ export interface IStingerPullResponse {
  * @throws StingerInternalServerError
  * @throws Error
  */
-export const tellStingerToPull = (stingerUrl: string, pushDescription: IPush, http: IHttpClient) => {
-  return http.requestRaw<IStingerPullResponse>({
+export const tellStingersToPull = (stingerUrls: string[], pushDescription: IPush, http: IHttpClient) => {
+  return stingerUrls.map(stingerUrl => http.requestRaw<IStingerPullResponse>({
     url: `${stingerUrl}/pull`,
     method: 'POST',
     data: {
@@ -71,5 +72,5 @@ export const tellStingerToPull = (stingerUrl: string, pushDescription: IPush, ht
       [R.equals(500), R.always(new StingerInternalServerError(error, error.address, error.port))],
       [R.T, R.always(error)],
     ])(error)
-  })
+  }))
 }
