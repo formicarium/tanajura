@@ -4152,9 +4152,9 @@ node-fetch@^2.1.1:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.1.2.tgz#ab884e8e7e57e38a944753cec706f788d1768bb5"
 
-node-git-server@^0.4.3:
-  version "0.4.3"
-  resolved "https://registry.yarnpkg.com/node-git-server/-/node-git-server-0.4.3.tgz#02aa7231e7766a609392a77ca31d7c4ede9fd04e"
+node-git-server@^0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/node-git-server/-/node-git-server-0.6.1.tgz#c69c82fe92335002442b92fb11d314911c3523b9"
   dependencies:
     through "^2.3.8"
 
