@@ -55,7 +55,7 @@
     "cz-conventional-changelog": "^2.1.0",
     "jest": "^22.2.1",
     "nodemon": "^1.14.12",
-    "semantic-release": "^15.9.5",
+    "semantic-release": "^17.2.3",
     "ts-jest": "^22.0.3",
     "ts-node": "^4.1.0",
     "tslint": "^5.9.1",
